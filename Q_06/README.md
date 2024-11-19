@@ -11,4 +11,10 @@
 제시된 프로젝트에서 발생하는 `문제들을 모두 서술`하고 올바르게 동작하도록 `소스코드를 개선`하시오.
 
 ## 답안
-- 
+- ### 레이캐스트에 검출된 적의 이름의 로그가 출력되지 않는 문제
+  - playercontroller 인스펙터에서 Gun의 targetlayer => enemy로 설정.
+- ### 카메라가 이동하지 않는 문제
+  - cameracontroller 에서, transform 즉, 카메라가 아닌 _followTarget이 transform의 위치에 따라 setPositionAndRotation중.
+  - transform(카메라)가 _followTarget(플레이어)의 위치에 따라 setpositionandrotation하게 설정.
+- ### 레이캐스트를 Gun 스크립트에서 origin.position, vector3.forward로 설정해서, 한 방향으로만 나가는 문제
+  - vector3.forward를 origin.forward로 수정해, muzzlePoint의 전방으로 발사하게 설정.
