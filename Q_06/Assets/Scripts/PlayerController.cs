@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Debug.DrawRay(_muzzlePoint.position, gameObject.transform.forward * 15, Color.blue);
         Move();
         Fire();
     }

@@ -131,7 +131,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 544023764665276946, guid: 7077a7e4b41694f8d8f125aa9a5a7afd, type: 3}
       propertyPath: m_Name
-      value: Enemy (1)
+      value: Ene
       objectReference: {fileID: 0}
     - target: {fileID: 544023764665276950, guid: 7077a7e4b41694f8d8f125aa9a5a7afd, type: 3}
       propertyPath: m_RootOrder
@@ -271,7 +271,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -356,7 +356,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -379,7 +379,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 544023764665276946, guid: 7077a7e4b41694f8d8f125aa9a5a7afd, type: 3}
       propertyPath: m_Name
-      value: Enemy (2)
+      value: Enem
       objectReference: {fileID: 0}
     - target: {fileID: 544023764665276950, guid: 7077a7e4b41694f8d8f125aa9a5a7afd, type: 3}
       propertyPath: m_RootOrder
@@ -493,7 +493,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3127339600668130624, guid: 0c905d22d069f4c62aa9afea3ae7f3d4, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3127339600668130624, guid: 0c905d22d069f4c62aa9afea3ae7f3d4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -534,6 +534,10 @@ PrefabInstance:
     - target: {fileID: 3127339600668130624, guid: 0c905d22d069f4c62aa9afea3ae7f3d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127339600668130630, guid: 0c905d22d069f4c62aa9afea3ae7f3d4, type: 3}
+      propertyPath: _targetLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 3127339600668130631, guid: 0c905d22d069f4c62aa9afea3ae7f3d4, type: 3}
       propertyPath: m_Name

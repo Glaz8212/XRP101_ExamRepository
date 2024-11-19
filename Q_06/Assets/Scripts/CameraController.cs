@@ -24,9 +24,9 @@ public class CameraController : MonoBehaviour
     {
         if (!_hasFollowTarget) return;
 
-        _followTarget.SetPositionAndRotation(
-            transform.position,
-            transform.rotation
+        transform.SetPositionAndRotation(
+            _followTarget.position,
+            _followTarget.rotation
             );
     }
 }
