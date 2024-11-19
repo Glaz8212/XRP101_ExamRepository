@@ -18,4 +18,24 @@
 제시된 프로젝트에서 발생하는 `문제들을 모두 서술`하고 올바르게 동작하도록 `소스코드를 개선`하시오.
 
 ## 답안
-- 
+- ### 모든 버튼들이 작동을 하지 않음
+  - => EventSystem의 부재 -> EventSystem각 씬에 추가 후 해결
+- ### Popup 버튼을 눌러도 게임 오브젝트가 정지하지 않음
+  -  지금 GameManager의 Pause (timescale = 0)을 호출해서 사용하고 있지만, 큐브의 회전이 time을 사용하지 않으므로 실행이 안되는 것 같음.
+  -  Pause 메서드 제거 후, popupcontroller에서 직접 gamemanager의 score를 0으로 만듦.
+  -  그 후에, 팝업창이 사라지면 다시 score에 원래 값 할당 -> 해결
+- ### 씬 전환 시 회전 속도 저장 문제
+  - 싱글톤이 제대로 적용 되지 않는 것 같음.
+  - Gamemanager의 awake에서 singletoninit을 호출하는데, _instance가 null이 아닌 경우에도 score를 초기화 함.
+  - ```
+            if (Instance == null)
+        {
+            SingletonInit();
+            Score = 0.1f;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    ```
+    로 수정
