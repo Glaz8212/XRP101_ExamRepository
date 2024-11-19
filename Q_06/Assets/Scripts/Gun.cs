@@ -13,6 +13,7 @@ public class Gun : MonoBehaviour
         Ray ray = new(origin.position, Vector3.forward);
         RaycastHit hit;
 
+        Debug.DrawRay(origin.position, gameObject.transform.forward * 15, Color.blue);
         if (Physics.Raycast(ray, out hit, _range, _targetLayer))
         {
             Debug.Log($"{hit.transform.name} Hit!!");
