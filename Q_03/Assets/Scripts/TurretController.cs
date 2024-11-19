@@ -21,6 +21,7 @@ public class TurretController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("플레이어 감지");
             Fire(other.transform);
         }
     }
@@ -36,6 +37,7 @@ public class TurretController : MonoBehaviour
     {
         while (true)
         {
+            Debug.Log("사격 코루틴 진입");
             yield return _wait;
             
             transform.rotation = Quaternion.LookRotation(new Vector3(
@@ -43,6 +45,7 @@ public class TurretController : MonoBehaviour
                 0,
                 target.position.z)
             );
+            Debug.Log("터렛 회전 실시");
             
             PooledBehaviour bullet = _bulletPool.TakeFromPool();
             bullet.transform.position = _muzzlePoint.position;
@@ -53,6 +56,7 @@ public class TurretController : MonoBehaviour
 
     private void Fire(Transform target)
     {
+        Debug.Log("사격 코루틴 실행");
         _coroutine = StartCoroutine(FireRoutine(target));
     }
 }
