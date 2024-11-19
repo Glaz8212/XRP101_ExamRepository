@@ -18,4 +18,29 @@
 제시된 프로젝트에서 발생하는 `문제들을 모두 서술`하고 올바르게 동작하도록 `소스코드를 개선`하시오.
 
 ## 답안
-- 
+- ### 공격(Q)를 실행하면, StateAttack.cs:49에 NullReferenceException오류 발생.
+  - 설정 제한 필요 (NormalMonster일 경우에 실행), null이 아닐 경우 실행
+  - ```
+            foreach (Collider col in cols)
+        {
+            if (col.CompareTag("NormalMonster"))
+            {
+                damagable = col.GetComponent<IDamagable>();
+                if (damagable != null)
+                {
+                    damagable.TakeHit(Controller.AttackValue);
+                }
+            }
+        }
+    ```
+    이렇게 변경한 후 실행 -> stack overflow발생
+  - stack overflow가 생기는 이유 추측.
+  - 공격을 실행한 후 exit을 했음에도 delayroutine이 실행되고 있는 상태 같음.
+    - bool  변수 추가 후 , enter와 exit에서 관리 => 계속 stack overflow 발생
+  - 코루틴 제거 시도
+    - 시간 기록 후, 2초 후에 공격 실행하도록 변경 => 계속 stack overflow 발생
+  - 상태 진입과 탈출에 디버그 로그를 찍어본 결과, 계속 상태 enter와 exit을 반복하여 발생하는 것을 발견.
+    - 상태 전환 쿨타임 추가 (statemachine.cs에 상태전환 쿨타임 추가) => 계속 stack overflow 발생
+
+  ---
+  일단 패스
