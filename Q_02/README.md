@@ -11,4 +11,21 @@
 두 가지 문제가 발생한 원인과 해결 방법을 모두 서술하시오.
 
 ## 답안
-- 
+
+- 2-1. Run 실행 시, Stack Overfloaw가 발생하는 스크립트 PlayerStatus.cs10
+  - ```
+    public float MoveSpeed
+    {
+        get => MoveSpeed;
+        private set => MoveSpeed = value;
+    }
+    ```
+    get과 set에 같은 변수가 사용되어, 계속 재귀 호출이 진행되어 stack overflow를 발생시킴.
+
+####     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }로 수정
+
+- 2-2. Transform의 Vector3 이동방향이 정규화(normalized)되어있지 않아서,
+대각선으로 이동 시 1.41배 빠르게 움직임.
+
+####         transform.Translate(_status.MoveSpeed * Time.deltaTime * direction.normalized);
+direction에 normalized를 추가해, 방향벡터로 변경
