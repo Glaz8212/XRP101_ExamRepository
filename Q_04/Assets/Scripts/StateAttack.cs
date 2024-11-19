@@ -7,7 +7,8 @@ using UnityEngine;
 public class StateAttack : PlayerState
 {
     private float _delay = 2;
-    private WaitForSeconds _wait;
+    private float _startTime;
+    private bool _hasAttacked;
     
     public StateAttack(PlayerController controller) : base(controller)
     {
@@ -16,22 +17,33 @@ public class StateAttack : PlayerState
 
     public override void Init()
     {
-        _wait = new WaitForSeconds(_delay);
         ThisType = StateType.Attack;
     }
 
     public override void Enter()
     {
-        Controller.StartCoroutine(DelayRoutine(Attack));
+        Debug.Log($"상태 진입 : {ThisType}");
+        _startTime = Time.time;
+        _hasAttacked = false;
     }
 
     public override void OnUpdate()
     {
-        Debug.Log("Attack On Update");
+        // 공격을 실행했을 경우 리턴
+        if (_hasAttacked) 
+            return;
+
+        if (Time.time - _startTime >= _delay)
+        {
+            Attack();
+            _hasAttacked = true; 
+            Exit();
+        }
     }
 
     public override void Exit()
     {
+        Debug.Log($"상태 탈출 : {ThisType}");
         Machine.ChangeState(StateType.Idle);
     }
 
@@ -45,17 +57,14 @@ public class StateAttack : PlayerState
         IDamagable damagable;
         foreach (Collider col in cols)
         {
-            damagable = col.GetComponent<IDamagable>();
-            damagable.TakeHit(Controller.AttackValue);
+            if (col.CompareTag("NormalMonster"))
+            {
+                damagable = col.GetComponent<IDamagable>();
+                if (damagable != null)
+                {
+                    damagable.TakeHit(Controller.AttackValue);
+                }
+            }
         }
     }
-
-    public IEnumerator DelayRoutine(Action action)
-    {
-        yield return _wait;
-
-        Attack();
-        Exit();
-    }
-
 }
