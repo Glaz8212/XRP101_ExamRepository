@@ -10,6 +10,7 @@ public class PopupController : MonoBehaviour
     private Button _popupButton;
 
     [SerializeField] private GameObject _popup;
+    private float _originalScore;
 
     private void Awake()
     {
@@ -31,13 +32,17 @@ public class PopupController : MonoBehaviour
     private void Activate()
     {
         _popup.gameObject.SetActive(true);
-        GameManager.Intance.Pause();
+
+        _originalScore = GameManager.Instance.Score;
+        GameManager.Instance.Score = 0;
+
         StartCoroutine(DeactivateRoutine());
     }
 
     private void Deactivate()
     {
         _popup.gameObject.SetActive(false);
+        GameManager.Instance.Score = _originalScore;
     }
 
     private IEnumerator DeactivateRoutine()
