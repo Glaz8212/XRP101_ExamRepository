@@ -21,4 +21,24 @@
 제시된 프로젝트에서 발생하는 `문제들을 모두 서술`하고 올바르게 동작하도록 `소스코드를 개선`하시오.
 
 ## 답안
-- 
+
+- ### 총알을 발사하지 않는 이유.
+  - 로그를 찍어본 결과, OnTriggerEnter가 실행되지 않는것을 발견.
+  - 이유 : Player에 Rigidbody가 존재하지 않음.
+
+-> bullet에도 Rigidbody가 달려있지 않아 에러로그 발생.
+- bulletPrefab에 rigidbody추가
+
+- ### 총알이 플레이어에 닿았을 때, BulletController의 OnTriggerEnter를 실행 하는 과정에서, PlayerController스크립트와 Collider가 다른곳에 위치함
+  - Player 상위 오브젝트에 is trigger 히트박스 추가 및
+  - 스크립트에서 playercontroller가 null이면 return;
+ 
+- 또한, 닿았을 경우 ReturnPool 실시해, 총알 추가 생성 방지
+
+- ### 플레이어가 is trigger를 벗어났을 경우에도 계속 총알 발사.
+  - 코루틴 중지 기능 부재.
+  - ontriggerexit => StopCoroutine();
+ 
+- ### 플레이어의 사망 사운드 출력 이슈
+  - 플레이어의 오디오 클립이 재생되자마자 게임 오브젝트가 비활성화됨
+  - 오디오클립의 길이만큼 기다린 후에 죽는 코루틴 추가 
