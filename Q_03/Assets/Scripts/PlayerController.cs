@@ -26,13 +26,20 @@ public class PlayerController : MonoBehaviour
 
         if (Hp <= 0)
         {
-            Die();
+            DieSound();
         }
     }
 
-    public void Die()
+    public void DieSound()
     {
-        _audio.Play();
+        Debug.Log($"{_audio.clip.name} Àç»ý");
+        _audio.PlayOneShot(_audio.clip);
+        StartCoroutine(Die());
+    }
+
+    private IEnumerator Die()
+    {
+        yield return new WaitForSeconds(_audio.clip.length);
         gameObject.SetActive(false);
     }
 }
