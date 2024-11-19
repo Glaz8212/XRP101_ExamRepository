@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Debug.DrawRay(_muzzlePoint.position, gameObject.transform.forward * 15, Color.blue);
         Move();
         Fire();
     }

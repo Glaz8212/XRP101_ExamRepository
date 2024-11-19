@@ -10,13 +10,15 @@ public class Gun : MonoBehaviour
     
     public void Fire(Transform origin)
     {
-        Ray ray = new(origin.position, Vector3.forward);
+        Ray ray = new(origin.position, origin.forward);
         RaycastHit hit;
 
-        Debug.DrawRay(origin.position, gameObject.transform.forward * 15, Color.blue);
+
         if (Physics.Raycast(ray, out hit, _range, _targetLayer))
         {
+            Vector3 hitPosition = new Vector3(hit.transform.position.x, 0, 0);
             Debug.Log($"{hit.transform.name} Hit!!");
+            Debug.Log($"{hitPosition}");
         }
     }
     
